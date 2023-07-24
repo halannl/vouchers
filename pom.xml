@@ -17,17 +17,8 @@
         <java.version>17</java.version>
     </properties>
 
-    <dependencyManagement>
-        <dependencies>
-            <!-- Dependências comuns usadas pelos três módulos -->
-            <!-- Exemplo: dependências do Spring Boot, MongoDB, etc. -->
-        </dependencies>
-    </dependencyManagement>
-
     <build>
         <plugins>
-            <!-- Plugin para compilar e empacotar os módulos -->
-            <!-- Plugin para compilar e empacotar os módulos -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
