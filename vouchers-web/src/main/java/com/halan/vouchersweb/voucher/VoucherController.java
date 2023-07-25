@@ -1,4 +1,4 @@
-package com.halan.vouchers.voucher;
+package com.halan.vouchersweb.voucher;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

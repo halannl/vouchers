@@ -4,18 +4,19 @@
 
 	<parent>
 		<groupId>com.halan</groupId>
-		<version>${revision}</version>
+		<version>1.0.0</version>
 		<artifactId>vouchers</artifactId>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>vouchers-repository</artifactId>
-	<version>${revision}</version>
+	<version>1.0.0</version>
 	<name>vouchers-repository</name>
+	<packaging>jar</packaging>
 	<description>Provedor de acesso a base de dados referente a Vouchers</description>
 
 	<properties>
 		<lombok.version>1.18.28</lombok.version>
-		<projectreactor.version>3.5.8</projectreactor.version>
+		<jakarta.version>3.0.2</jakarta.version>
 	</properties>
 
 	<dependencies>
@@ -27,7 +28,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-mongodb-reactive</artifactId>
+			<artifactId>spring-boot-starter-data-mongodb</artifactId>
 			<version>${springboot.version}</version>
 			<exclusions>
 				<exclusion>
@@ -37,10 +38,10 @@
 			</exclusions>
 		</dependency>
 		<dependency>
-			<groupId>io.projectreactor</groupId>
-			<artifactId>reactor-test</artifactId>
-			<version>${projectreactor.version}</version>
-			<scope>test</scope>
+			<groupId>jakarta.validation</groupId>
+			<artifactId>jakarta.validation-api</artifactId>
+			<version>${jakarta.version}</version>
+			<scope>compile</scope>
 		</dependency>
 	</dependencies>
 
