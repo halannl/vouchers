@@ -1,6 +1,6 @@
-package com.halan.vouchersweb.usuario;
+package com.halan.vouchersweb.ofertaespecial;
 
-import com.halan.vouchersrepository.usuario.Usuario;
+import com.halan.vouchersrepository.ofertaespecial.OfertaEspecial;
 import com.halan.vouchersservice.ofertaespecial.OfertaEspecialService;
 import com.halan.vouchersservice.usuario.UsuarioService;
 import org.junit.jupiter.api.Test;
@@ -20,8 +20,8 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @SpringJUnitConfig
-@WebMvcTest(UsuarioController.class)
-class UsuarioControllerTest {
+@WebMvcTest(OfertaEspecialController.class)
+class OfertaEspecialControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -34,24 +34,25 @@ class UsuarioControllerTest {
 
     @Test
     @WithMockUser(username = "admin", roles = "ADMIN")
-    void testGetUsuario() throws Exception {
-        Usuario usuario = new Usuario("joao@example.com", "Joao");
+    void testGetOferta() throws Exception {
+        OfertaEspecial ofertaEspecial = new OfertaEspecial("codigo1", "descricao 1", (short) 10);
 
-        when(usuarioService.get("joao@example.com")).thenReturn(Optional.of(usuario));
+        when(ofertaEspecialService.get("codigo1")).thenReturn(Optional.of(ofertaEspecial));
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/usuarios/joao@example.com")
+        mockMvc.perform(MockMvcRequestBuilders.get("/ofertasespeciais/codigo1")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(jsonPath("$.email").value("joao@example.com"))
-                .andExpect(jsonPath("$.nome").value("Joao"));
+                .andExpect(jsonPath("$.codigo").value("codigo1"))
+                .andExpect(jsonPath("$.descricao").value("descricao 1"))
+                .andExpect(jsonPath("$.descontoPercentual").value(10));
     }
 
     @Test
     @WithMockUser(username = "admin", roles = "ADMIN")
-    void testGetUsuarioNotFound() throws Exception {
-        when(usuarioService.get("maria@example.com")).thenReturn(Optional.empty());
+    void testGetOfertaNotFound() throws Exception {
+        when(ofertaEspecialService.get("codigo2")).thenReturn(Optional.empty());
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/usuarios/maria@example.com")
+        mockMvc.perform(MockMvcRequestBuilders.get("/ofertasespeciais/codigo2")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(jsonPath("$").doesNotExist());
@@ -59,29 +60,29 @@ class UsuarioControllerTest {
 
     @Test
     @WithMockUser(username = "admin", roles = "ADMIN")
-    void testSaveUsuarioNovo() throws Exception {
-        Usuario usuario = new Usuario("pedro@example.com", "Pedro");
+    void testSaveOfertaNova() throws Exception {
+        OfertaEspecial ofertaEspecial = new OfertaEspecial("codigo3", "descricao 3", (short) 30);
 
-        when(usuarioService.save(usuario)).thenReturn(false);
+        when(ofertaEspecialService.save(ofertaEspecial)).thenReturn(false);
 
-        mockMvc.perform(MockMvcRequestBuilders.put("/usuarios")
+        mockMvc.perform(MockMvcRequestBuilders.put("/ofertasespeciais")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"email\":\"pedro@example.com\",\"nome\":\"Pedro\"}"))
+                        .content("{\"codigo\":\"codigo3\",\"descricao\":\"descricao 3\",\"descontoPercentual\":\"30\"}"))
                 .andExpect(MockMvcResultMatchers.status().isCreated())
-                .andExpect(MockMvcResultMatchers.content().string("Usuario criado com sucesso"));
+                .andExpect(MockMvcResultMatchers.content().string("Oferta especial criada com sucesso"));
     }
 
     @Test
     @WithMockUser(username = "admin", roles = "ADMIN")
-    void testSaveUsuarioExistente() throws Exception {
-        Usuario usuario = new Usuario("ana@example.com", "Ana");
+    void testSaveOfertaExistente() throws Exception {
+        OfertaEspecial ofertaEspecial = new OfertaEspecial("codigo4", "descricao 4", (short) 40);
 
-        when(usuarioService.save(usuario)).thenReturn(true);
+        when(ofertaEspecialService.save(ofertaEspecial)).thenReturn(true);
 
-        mockMvc.perform(MockMvcRequestBuilders.put("/usuarios")
+        mockMvc.perform(MockMvcRequestBuilders.put("/ofertasespeciais")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"email\":\"ana@example.com\",\"nome\":\"Ana\"}"))
+                        .content("{\"codigo\":\"codigo4\",\"descricao\":\"descricao 4\",\"descontoPercentual\":\"40\"}"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string("Usuario ja existe"));
+                .andExpect(MockMvcResultMatchers.content().string("Oferta especial ja existe"));
     }
 }

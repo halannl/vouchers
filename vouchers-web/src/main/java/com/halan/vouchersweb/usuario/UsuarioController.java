@@ -20,7 +20,7 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @GetMapping("/usuarios/{email}")
-    public ResponseEntity<Usuario> getUsuario(@PathVariable String email) {
+    public ResponseEntity<Usuario> get(@PathVariable String email) {
         return ResponseEntity.ok(usuarioService.get(email).orElse(null));
     }
 
@@ -28,9 +28,9 @@ public class UsuarioController {
     public ResponseEntity<String> save(@Valid @RequestBody Usuario usuario) {
         final ResponseEntity<String> toReturn;
         if (!usuarioService.save(usuario)) {
-            toReturn = ResponseEntity.status(HttpStatus.CREATED).body("Usuário criado com sucesso");
+            toReturn = ResponseEntity.status(HttpStatus.CREATED).body("Usuario criado com sucesso");
         } else {
-            toReturn = ResponseEntity.status(HttpStatus.OK).body("Usuário já existe");
+            toReturn = ResponseEntity.status(HttpStatus.OK).body("Usuario ja existe");
         }
         return toReturn;
     }

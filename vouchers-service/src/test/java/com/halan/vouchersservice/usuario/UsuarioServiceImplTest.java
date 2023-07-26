@@ -58,7 +58,7 @@ class UsuarioServiceImplTest {
         assertTrue(resultado);
 
         verify(usuarioRepository, times(1)).existsById("pedro@example.com");
-        verify(usuarioRepository, never()).save(usuario); // Verifica que o método save não foi chamado.
+        verify(usuarioRepository, never()).save(usuario);
     }
 
     @Test

@@ -22,6 +22,10 @@ public class OfertaEspecialServiceImpl implements OfertaEspecialService {
 
     @Override
     public boolean save(OfertaEspecial ofertaEspecial) {
-        return false;
+        final boolean existe = ofertaEspecialRepository.existsById(ofertaEspecial.getCodigo());
+        if (!existe) {
+            ofertaEspecialRepository.save(ofertaEspecial);
+        }
+        return existe;
     }
 }
