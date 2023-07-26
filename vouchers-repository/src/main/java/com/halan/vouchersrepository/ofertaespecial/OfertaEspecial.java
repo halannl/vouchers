@@ -1,9 +1,12 @@
 package com.halan.vouchersrepository.ofertaespecial;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
@@ -12,7 +15,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document("ofertasespeciais")
 @EqualsAndHashCode
 public class OfertaEspecial {
-    private String nome;
+    @Id
+    private String codigo;
     private String descricao;
-    private int descontoPercentual;
+    @Min(value = 0, message = "O desconto mínimo é de 0%")
+    @Max(value = 100, message = "O desconto máximo é de 100%")
+    private short descontoPercentual;
 }

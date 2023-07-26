@@ -11,7 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@ComponentScan(basePackages = {"com.halan"})
+@ComponentScan(basePackages = {"com.halan.vouchersservice.usuario",
+        "com.halan.vouchersweb.config"})
 @Tag(name = "API de usuarios")
 public class UsuarioController {
 

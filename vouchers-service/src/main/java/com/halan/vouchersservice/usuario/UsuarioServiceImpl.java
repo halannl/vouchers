@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-@ComponentScan(basePackages = {"com.halan"})
+@ComponentScan(basePackages = {"com.halan.vouchersrepository.usuario"})
 public class UsuarioServiceImpl implements UsuarioService {
 
     @Autowired

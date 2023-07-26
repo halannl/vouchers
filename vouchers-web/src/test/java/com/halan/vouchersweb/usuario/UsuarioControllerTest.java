@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -28,6 +29,7 @@ class UsuarioControllerTest {
     private UsuarioService usuarioService;
 
     @Test
+    @WithMockUser(username="admin",roles="ADMIN")
     void testGetUsuario() throws Exception {
         Usuario usuario = new Usuario("joao@example.com", "João");
 
@@ -41,6 +43,7 @@ class UsuarioControllerTest {
     }
 
     @Test
+    @WithMockUser(username="admin",roles="ADMIN")
     void testGetUsuarioNotFound() throws Exception {
         when(usuarioService.get("maria@example.com")).thenReturn(Optional.empty());
 
@@ -51,6 +54,7 @@ class UsuarioControllerTest {
     }
 
     @Test
+    @WithMockUser(username="admin",roles="ADMIN")
     void testSaveUsuarioNovo() throws Exception {
         Usuario usuario = new Usuario("pedro@example.com", "Pedro");
 
@@ -64,6 +68,7 @@ class UsuarioControllerTest {
     }
 
     @Test
+    @WithMockUser(username="admin",roles="ADMIN")
     void testSaveUsuarioExistente() throws Exception {
         Usuario usuario = new Usuario("ana@example.com", "Ana");
 
