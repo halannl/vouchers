@@ -7,7 +7,6 @@ import com.halan.vouchersmodel.voucher.VoucherDTO;
 import com.halan.vouchersmodel.voucher.VoucherException;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface VoucherService {
 
