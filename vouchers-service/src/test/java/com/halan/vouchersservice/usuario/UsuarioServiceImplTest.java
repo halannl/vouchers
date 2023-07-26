@@ -1,7 +1,7 @@
 package com.halan.vouchersservice.usuario;
 
-import com.halan.vouchersrepository.usuario.Usuario;
-import com.halan.vouchersrepository.usuario.UsuarioRepository;
+import com.halan.vouchersmodel.usuario.Usuario;
+import com.halan.vouchersmodel.usuario.UsuarioRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;

@@ -1,4 +1,4 @@
-package com.halan.vouchersrepository;
+package com.halan.vouchersmodel;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

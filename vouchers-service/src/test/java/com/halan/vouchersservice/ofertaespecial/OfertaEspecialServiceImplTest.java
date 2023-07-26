@@ -1,7 +1,7 @@
 package com.halan.vouchersservice.ofertaespecial;
 
-import com.halan.vouchersrepository.ofertaespecial.OfertaEspecial;
-import com.halan.vouchersrepository.ofertaespecial.OfertaEspecialRepository;
+import com.halan.vouchersmodel.ofertaespecial.OfertaEspecial;
+import com.halan.vouchersmodel.ofertaespecial.OfertaEspecialRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

@@ -1,6 +1,6 @@
 package com.halan.vouchersservice.ofertaespecial;
 
-import com.halan.vouchersrepository.ofertaespecial.OfertaEspecial;
+import com.halan.vouchersmodel.ofertaespecial.OfertaEspecial;
 
 import java.util.Optional;
 

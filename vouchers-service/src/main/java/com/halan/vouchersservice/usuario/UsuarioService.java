@@ -1,6 +1,6 @@
 package com.halan.vouchersservice.usuario;
 
-import com.halan.vouchersrepository.usuario.Usuario;
+import com.halan.vouchersmodel.usuario.Usuario;
 
 import java.util.Optional;
 

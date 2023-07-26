@@ -1,8 +1,9 @@
 package com.halan.vouchersweb.ofertaespecial;
 
-import com.halan.vouchersrepository.ofertaespecial.OfertaEspecial;
+import com.halan.vouchersmodel.ofertaespecial.OfertaEspecial;
 import com.halan.vouchersservice.ofertaespecial.OfertaEspecialService;
 import com.halan.vouchersservice.usuario.UsuarioService;
+import com.halan.vouchersservice.voucher.VoucherService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -31,6 +32,9 @@ class OfertaEspecialControllerTest {
 
     @MockBean
     private OfertaEspecialService ofertaEspecialService;
+
+    @MockBean
+    private VoucherService voucherService;
 
     @Test
     @WithMockUser(username = "admin", roles = "ADMIN")

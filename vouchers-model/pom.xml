@@ -8,11 +8,11 @@
 		<artifactId>vouchers</artifactId>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>vouchers-repository</artifactId>
+	<artifactId>vouchers-model</artifactId>
 	<version>1.0.0</version>
-	<name>vouchers-repository</name>
+	<name>vouchers-model</name>
 	<packaging>jar</packaging>
-	<description>Provedor de acesso a base de dados referente a Vouchers</description>
+	<description>Provedor de modelos e acesso a base de dados referente a Vouchers</description>
 
 	<properties>
 		<lombok.version>1.18.28</lombok.version>
