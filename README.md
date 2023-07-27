@@ -37,3 +37,21 @@ Observação: Assume-se que existe uma instância de MongoDB rodando localmente
 A interface de usuário do Swagger fornece instruções para uso dos endpoints disponíveis. <br>
 Basicamente, usuários e ofertas especiais devem ser previamente inseridos para que se 
 possa inserir vouchers.
+
+Aqui vou fornecer alguns dados de testes (Request body - json) que podem ser usados pra testar os endpoints:
+
+#### /usuarios (PUT)
+
+- {"email": "pedro@email.com", "nome": "Pedro Silva"}
+- {"email": "ana@email.com", "nome": "Ana Machado"}
+
+#### /ofertasespeciais (PUT)
+
+- {"codigo": "RENNER40", "descricao": "Desconto de 40% lojas Renner", "descontoPercentual": 40}
+- {"codigo": "LOJAMER25", "descricao": "Desconto de 25% lojas Americanas", "descontoPercentual": 25}
+
+#### /vouchers (PUT)
+
+- {"codigoOfertaEspecial": "RENNER40", "emailUsuario": "pedro@email.com", "validade": "2023-08-27T14:49:39.210Z"}
+- {"codigoOfertaEspecial": "LOJAMER25", "emailUsuario": "pedro@email.com", "validade": "2023-09-27T14:49:39.210Z"}
+
