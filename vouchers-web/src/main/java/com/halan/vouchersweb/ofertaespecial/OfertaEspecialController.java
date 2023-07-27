@@ -39,7 +39,7 @@ public class OfertaEspecialController {
         if (!ofertaEspecialService.save(ofertaEspecial)) {
             toReturn = ResponseEntity.status(HttpStatus.CREATED).body("Oferta especial criada com sucesso");
         } else {
-            toReturn = ResponseEntity.status(HttpStatus.OK).body("Oferta especial ja existe");
+            toReturn = ResponseEntity.status(HttpStatus.CONFLICT).body("Oferta especial ja existe");
         }
         return toReturn;
     }

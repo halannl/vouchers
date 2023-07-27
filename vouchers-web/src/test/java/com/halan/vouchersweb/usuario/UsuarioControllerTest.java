@@ -85,7 +85,7 @@ class UsuarioControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.put("/usuarios")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"email\":\"ana@example.com\",\"nome\":\"Ana\"}"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.status().isConflict())
                 .andExpect(MockMvcResultMatchers.content().string("Usuario ja existe"));
     }
 }

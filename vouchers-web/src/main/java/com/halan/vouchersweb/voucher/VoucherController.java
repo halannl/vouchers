@@ -13,6 +13,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,12 +44,14 @@ public class VoucherController {
         if (logger.isInfoEnabled()) {
             logger.info(String.format("Iniciando inserção de voucher por dto: %s", voucherDTO));
         }
+        ResponseEntity<String> toReturn;
         try {
             voucherService.save(voucherDTO);
+            toReturn = ResponseEntity.status(HttpStatus.CREATED).body("Voucher inserido com sucesso");
         } catch (UsuarioException | OfertaEspecialException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            toReturn = ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
         }
-        return ResponseEntity.ok("Voucher inserido com sucesso");
+        return toReturn;
     }
 
     @PostMapping("/vouchers/validar")
@@ -55,12 +59,13 @@ public class VoucherController {
         if (logger.isInfoEnabled()) {
             logger.info(String.format("Iniciando validacao de voucher por dto: %s", voucherValidarDTO));
         }
+        ResponseEntity<String> toReturn;
         try {
-            voucherService.validarVoucher(
-                    voucherValidarDTO.getCodigoVoucher(), voucherValidarDTO.getEmailUsuario());
+            voucherService.validarVoucher(voucherValidarDTO.getCodigoVoucher(), voucherValidarDTO.getEmailUsuario());
+            toReturn = ResponseEntity.status(HttpStatus.OK).body("Voucher validado com sucesso");
         } catch (UsuarioException | VoucherException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            toReturn = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
-        return ResponseEntity.ok("Voucher validado com sucesso");
+        return toReturn;
     }
 }

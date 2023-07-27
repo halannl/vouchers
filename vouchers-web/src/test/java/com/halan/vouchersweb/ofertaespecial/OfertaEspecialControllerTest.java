@@ -86,7 +86,7 @@ class OfertaEspecialControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.put("/ofertasespeciais")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"codigo\":\"codigo4\",\"descricao\":\"descricao 4\",\"descontoPercentual\":\"40\"}"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.status().isConflict())
                 .andExpect(MockMvcResultMatchers.content().string("Oferta especial ja existe"));
     }
 }

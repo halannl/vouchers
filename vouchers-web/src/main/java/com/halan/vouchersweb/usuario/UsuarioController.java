@@ -39,7 +39,7 @@ public class UsuarioController {
         if (!usuarioService.save(usuario)) {
             toReturn = ResponseEntity.status(HttpStatus.CREATED).body("Usuario criado com sucesso");
         } else {
-            toReturn = ResponseEntity.status(HttpStatus.OK).body("Usuario ja existe");
+            toReturn = ResponseEntity.status(HttpStatus.CONFLICT).body("Usuario ja existe");
         }
         return toReturn;
     }

@@ -68,7 +68,7 @@ class VoucherControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.put("/vouchers")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"codigoOfertaEspecial\":\"voucher1\",\"emailUsuario\":\"pedro@email.com\",\"validade\":\""+format.format(tomorrow)+"\"}"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.status().isCreated())
                 .andExpect(MockMvcResultMatchers.content().string("Voucher inserido com sucesso"));
 
         verify(voucherService, times(1)).save(voucherDTO);
