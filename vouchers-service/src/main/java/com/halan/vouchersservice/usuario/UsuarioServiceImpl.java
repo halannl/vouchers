@@ -22,7 +22,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public Optional<Usuario> get(String email) {
         if (logger.isInfoEnabled()) {
-            logger.info(String.format("Busca de usuario por email: %s", email));
+            logger.info("Busca de usuario por email: {}", email);
         }
         return usuarioRepository.findById(email);
     }
@@ -30,7 +30,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public boolean save(Usuario usuario) {
         if (logger.isInfoEnabled()) {
-            logger.info(String.format("Inserindo usuario: %s", usuario));
+            logger.info("Inserindo usuario: {}", usuario);
         }
         final boolean existe = usuarioRepository.existsById(usuario.getEmail());
         if (!existe) {

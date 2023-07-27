@@ -22,7 +22,7 @@ public class OfertaEspecialServiceImpl implements OfertaEspecialService {
     @Override
     public Optional<OfertaEspecial> get(String codigo) {
         if (logger.isInfoEnabled()) {
-            logger.info(String.format("Busca de oferta especial por codigo: %s", codigo));
+            logger.info("Busca de oferta especial por codigo: {}", codigo);
         }
         return ofertaEspecialRepository.findById(codigo);
     }
@@ -30,7 +30,7 @@ public class OfertaEspecialServiceImpl implements OfertaEspecialService {
     @Override
     public boolean save(OfertaEspecial ofertaEspecial) {
         if (logger.isInfoEnabled()) {
-            logger.info(String.format("Inserindo oferta especial: %s", ofertaEspecial));
+            logger.info("Inserindo oferta especial: {}", ofertaEspecial);
         }
         final boolean existe = ofertaEspecialRepository.existsById(ofertaEspecial.getCodigo());
         if (!existe) {

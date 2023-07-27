@@ -33,7 +33,7 @@ public class VoucherController {
     @GetMapping("/vouchers/{email}")
     ResponseEntity<List<Voucher>> getByUsuario(@PathVariable String email) {
         if (logger.isInfoEnabled()) {
-            logger.info(String.format("Iniciando busca de usuario por email: %s", email));
+            logger.info("Iniciando busca de usuario por email: {}", email);
         }
         return ResponseEntity.of(Optional.ofNullable(voucherService.getValidoByEmailUsuario(email)));
     }
@@ -41,7 +41,7 @@ public class VoucherController {
     @PutMapping("/vouchers")
     ResponseEntity<String> save(@Valid @RequestBody VoucherDTO voucherDTO) {
         if (logger.isInfoEnabled()) {
-            logger.info(String.format("Iniciando inserção de voucher por dto: %s", voucherDTO));
+            logger.info("Iniciando inserção de voucher por dto: {}", voucherDTO);
         }
         ResponseEntity<String> toReturn;
         try {
@@ -56,7 +56,7 @@ public class VoucherController {
     @PostMapping("/vouchers/validar")
     ResponseEntity<String> validarVoucher(@Valid @RequestBody VoucherValidarDTO voucherValidarDTO) {
         if (logger.isInfoEnabled()) {
-            logger.info(String.format("Iniciando validacao de voucher por dto: %s", voucherValidarDTO));
+            logger.info("Iniciando validacao de voucher por dto: {}", voucherValidarDTO);
         }
         ResponseEntity<String> toReturn;
         try {

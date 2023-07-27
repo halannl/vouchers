@@ -25,7 +25,7 @@ public class OfertaEspecialController {
     @GetMapping("/ofertasespeciais/{codigo}")
     public ResponseEntity<OfertaEspecial> get(@PathVariable String codigo) {
         if (logger.isInfoEnabled()) {
-            logger.info(String.format("Iniciando busca de oferta especial por codigo: %s", codigo));
+            logger.info("Iniciando busca de oferta especial por codigo: {}", codigo);
         }
         return ofertaEspecialService.get(codigo)
                 .map(ofertaEspecial -> ResponseEntity.status(HttpStatus.OK).body(ofertaEspecial))
@@ -35,7 +35,7 @@ public class OfertaEspecialController {
     @PutMapping("ofertasespeciais")
     public ResponseEntity<String> save(@Valid @RequestBody OfertaEspecial ofertaEspecial) {
         if (logger.isInfoEnabled()) {
-            logger.info(String.format("Iniciando inserção de oferta especial: %s", ofertaEspecial));
+            logger.info("Iniciando inserção de oferta especial: {}", ofertaEspecial);
         }
         final boolean ofertaEspecialSalva = ofertaEspecialService.save(ofertaEspecial);
         return ResponseEntity

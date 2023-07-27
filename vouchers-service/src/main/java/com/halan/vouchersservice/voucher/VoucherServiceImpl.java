@@ -40,7 +40,7 @@ public class VoucherServiceImpl implements VoucherService {
     @Override
     public List<Voucher> getValidoByEmailUsuario(String email) {
         if (logger.isInfoEnabled()) {
-            logger.info(String.format("Busca de voucher valido por email de usuario: %s", email));
+            logger.info("Busca de voucher valido por email de usuario: {}", email);
         }
         return voucherRepository.findByUsuarioEmail(email)
                 .stream()
@@ -52,7 +52,7 @@ public class VoucherServiceImpl implements VoucherService {
     @Override
     public void validarVoucher(String codigoVoucher, String emailUsuario) throws UsuarioException, VoucherException {
         if (logger.isInfoEnabled()) {
-            logger.info(String.format("Validando voucher de codigo: %s, do usuario de email: %s", codigoVoucher, emailUsuario));
+            logger.info("Validando voucher de codigo: {}, do usuario de email: {}", codigoVoucher, emailUsuario);
         }
         if (!usuarioRepository.existsById(emailUsuario)) {
             throw new UsuarioException("Usuário não encontrado");
@@ -83,7 +83,7 @@ public class VoucherServiceImpl implements VoucherService {
         Voucher voucher = new Voucher(gerarCodigoUnico(), usuario.get(),
                 ofertaEspecial.get(), voucherDTO.getValidade(), null);
         if (logger.isInfoEnabled()) {
-            logger.info(String.format("Salvando voucher: %s", voucher));
+            logger.info("Salvando voucher: {}", voucher);
         }
         voucherRepository.save(voucher);
     }
@@ -94,7 +94,7 @@ public class VoucherServiceImpl implements VoucherService {
             codigo = RandomStringUtils.randomAlphanumeric(10).toUpperCase();
         }
         if (logger.isInfoEnabled()) {
-            logger.info(String.format("Codigo de Voucher unico gerado: %s", codigo));
+            logger.info("Codigo de Voucher unico gerado: {}", codigo);
         }
         return codigo;
     }

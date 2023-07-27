@@ -25,7 +25,7 @@ public class UsuarioController {
     @GetMapping("/usuarios/{email}")
     public ResponseEntity<Usuario> get(@PathVariable String email) {
         if (logger.isInfoEnabled()) {
-            logger.info(String.format("Iniciando busca de usuario por email: %s", email));
+            logger.info("Iniciando busca de usuario por email: {}", email);
         }
         return usuarioService.get(email).map(usuario -> ResponseEntity.status(HttpStatus.OK).body(usuario))
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NO_CONTENT).body(null));
@@ -34,7 +34,7 @@ public class UsuarioController {
     @PutMapping("usuarios")
     public ResponseEntity<String> save(@Valid @RequestBody Usuario usuario) {
         if (logger.isInfoEnabled()) {
-            logger.info(String.format("Iniciando inserção de usuário: %s", usuario));
+            logger.info("Iniciando inserção de usuário: {}", usuario);
         }
         final boolean usuarioSalvo = usuarioService.save(usuario);
         return ResponseEntity
