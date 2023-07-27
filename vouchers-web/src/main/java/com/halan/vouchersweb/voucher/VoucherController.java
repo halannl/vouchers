@@ -7,6 +7,7 @@ import com.halan.vouchersmodel.voucher.VoucherDTO;
 import com.halan.vouchersmodel.voucher.VoucherException;
 import com.halan.vouchersmodel.voucher.VoucherValidarDTO;
 import com.halan.vouchersservice.voucher.VoucherService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
@@ -30,6 +31,8 @@ public class VoucherController {
     @Autowired
     private VoucherService voucherService;
 
+    @Operation(summary = "get by email usuario",
+            description = "Obtem uma lista de vouchers para usuario com email fornecido")
     @GetMapping("/vouchers/{email}")
     ResponseEntity<List<Voucher>> getByUsuario(@PathVariable String email) {
         if (logger.isInfoEnabled()) {
@@ -38,6 +41,8 @@ public class VoucherController {
         return ResponseEntity.of(Optional.ofNullable(voucherService.getValidoByEmailUsuario(email)));
     }
 
+    @Operation(summary = "save", description = "Cria um objeto Voucher com validade fornecida" +
+            " para email usuario e codigo oferta validos fornecidos")
     @PutMapping("/vouchers")
     ResponseEntity<String> save(@Valid @RequestBody VoucherDTO voucherDTO) {
         if (logger.isInfoEnabled()) {
@@ -53,6 +58,8 @@ public class VoucherController {
         return toReturn;
     }
 
+    @Operation(summary = "validar voucher",
+            description = "Valida (ou usa) o voucher com codigo do voucher e email usuario validos fornecidos")
     @PostMapping("/vouchers/validar")
     ResponseEntity<String> validarVoucher(@Valid @RequestBody VoucherValidarDTO voucherValidarDTO) {
         if (logger.isInfoEnabled()) {

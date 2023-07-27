@@ -2,6 +2,7 @@ package com.halan.vouchersweb.ofertaespecial;
 
 import com.halan.vouchersmodel.ofertaespecial.OfertaEspecial;
 import com.halan.vouchersservice.ofertaespecial.OfertaEspecialService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
@@ -22,6 +23,7 @@ public class OfertaEspecialController {
     @Autowired
     private OfertaEspecialService ofertaEspecialService;
 
+    @Operation(summary = "get by codigo", description = "Obtem Oferta Especial por codigo")
     @GetMapping("/ofertasespeciais/{codigo}")
     public ResponseEntity<OfertaEspecial> get(@PathVariable String codigo) {
         if (logger.isInfoEnabled()) {
@@ -32,6 +34,7 @@ public class OfertaEspecialController {
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NO_CONTENT).body(null));
     }
 
+    @Operation(summary = "save", description = "Insere um objeto unico de OfertaEspecial")
     @PutMapping("ofertasespeciais")
     public ResponseEntity<String> save(@Valid @RequestBody OfertaEspecial ofertaEspecial) {
         if (logger.isInfoEnabled()) {

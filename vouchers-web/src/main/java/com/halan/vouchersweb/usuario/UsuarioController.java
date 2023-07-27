@@ -2,6 +2,7 @@ package com.halan.vouchersweb.usuario;
 
 import com.halan.vouchersmodel.usuario.Usuario;
 import com.halan.vouchersservice.usuario.UsuarioService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
@@ -22,6 +23,7 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
+    @Operation(summary = "get by email", description = "Obtem Usuario por email")
     @GetMapping("/usuarios/{email}")
     public ResponseEntity<Usuario> get(@PathVariable String email) {
         if (logger.isInfoEnabled()) {
@@ -31,6 +33,7 @@ public class UsuarioController {
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NO_CONTENT).body(null));
     }
 
+    @Operation(summary = "save", description = "Insere um objeto unico de Usuario")
     @PutMapping("usuarios")
     public ResponseEntity<String> save(@Valid @RequestBody Usuario usuario) {
         if (logger.isInfoEnabled()) {
