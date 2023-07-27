@@ -57,7 +57,7 @@ class UsuarioControllerTest {
 
         mockMvc.perform(MockMvcRequestBuilders.get("/usuarios/maria@example.com")
                         .accept(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.status().isNoContent())
                 .andExpect(jsonPath("$").doesNotExist());
     }
 

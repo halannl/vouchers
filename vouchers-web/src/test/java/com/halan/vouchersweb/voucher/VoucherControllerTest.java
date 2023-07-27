@@ -77,8 +77,6 @@ class VoucherControllerTest {
     @Test
     @WithMockUser(username = "admin", roles = "ADMIN")
     void testValidarVoucher() throws Exception {
-        VoucherValidarDTO voucherValidarDTO = new VoucherValidarDTO("voucher1", "pedro@email.com");
-
         mockMvc.perform(MockMvcRequestBuilders.post("/vouchers/validar")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"codigoVoucher\":\"voucher1\",\"emailUsuario\":\"pedro@email.com\"}"))

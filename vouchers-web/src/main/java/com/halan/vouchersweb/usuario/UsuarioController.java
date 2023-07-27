@@ -27,7 +27,8 @@ public class UsuarioController {
         if (logger.isInfoEnabled()) {
             logger.info(String.format("Iniciando busca de usuario por email: %s", email));
         }
-        return ResponseEntity.ok(usuarioService.get(email).orElse(null));
+        return usuarioService.get(email).map(usuario -> ResponseEntity.status(HttpStatus.OK).body(usuario))
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NO_CONTENT).body(null));
     }
 
     @PutMapping("usuarios")
@@ -35,12 +36,9 @@ public class UsuarioController {
         if (logger.isInfoEnabled()) {
             logger.info(String.format("Iniciando inserção de usuário: %s", usuario));
         }
-        final ResponseEntity<String> toReturn;
-        if (!usuarioService.save(usuario)) {
-            toReturn = ResponseEntity.status(HttpStatus.CREATED).body("Usuario criado com sucesso");
-        } else {
-            toReturn = ResponseEntity.status(HttpStatus.CONFLICT).body("Usuario ja existe");
-        }
-        return toReturn;
+        final boolean usuarioSalvo = usuarioService.save(usuario);
+        return ResponseEntity
+                .status(usuarioSalvo ? HttpStatus.CONFLICT : HttpStatus.CREATED)
+                .body(usuarioSalvo ? "Usuario ja existe" : "Usuario criado com sucesso");
     }
 }

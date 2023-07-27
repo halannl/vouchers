@@ -58,7 +58,7 @@ class OfertaEspecialControllerTest {
 
         mockMvc.perform(MockMvcRequestBuilders.get("/ofertasespeciais/codigo2")
                         .accept(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.status().isNoContent())
                 .andExpect(jsonPath("$").doesNotExist());
     }
 

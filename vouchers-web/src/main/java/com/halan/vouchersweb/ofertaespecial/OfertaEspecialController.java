@@ -27,7 +27,9 @@ public class OfertaEspecialController {
         if (logger.isInfoEnabled()) {
             logger.info(String.format("Iniciando busca de oferta especial por codigo: %s", codigo));
         }
-        return ResponseEntity.ok(ofertaEspecialService.get(codigo).orElse(null));
+        return ofertaEspecialService.get(codigo)
+                .map(ofertaEspecial -> ResponseEntity.status(HttpStatus.OK).body(ofertaEspecial))
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NO_CONTENT).body(null));
     }
 
     @PutMapping("ofertasespeciais")
@@ -35,12 +37,9 @@ public class OfertaEspecialController {
         if (logger.isInfoEnabled()) {
             logger.info(String.format("Iniciando inserção de oferta especial: %s", ofertaEspecial));
         }
-        final ResponseEntity<String> toReturn;
-        if (!ofertaEspecialService.save(ofertaEspecial)) {
-            toReturn = ResponseEntity.status(HttpStatus.CREATED).body("Oferta especial criada com sucesso");
-        } else {
-            toReturn = ResponseEntity.status(HttpStatus.CONFLICT).body("Oferta especial ja existe");
-        }
-        return toReturn;
+        final boolean ofertaEspecialSalva = ofertaEspecialService.save(ofertaEspecial);
+        return ResponseEntity
+                .status(ofertaEspecialSalva ? HttpStatus.CONFLICT : HttpStatus.CREATED)
+                .body(ofertaEspecialSalva ? "Oferta especial ja existe" : "Oferta especial criada com sucesso");
     }
 }

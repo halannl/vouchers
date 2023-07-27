@@ -16,11 +16,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -58,40 +54,30 @@ class VoucherServiceImplTest {
 
     @Test
     void testValidarVoucher() throws UsuarioException, VoucherException {
-        // Criar um voucher fictício para o teste.
         Voucher voucher = new Voucher("voucher1", new Usuario("usuario1", "Usuário 1"),
                 new OfertaEspecial("oferta1", "Oferta Especial 1", (short) 30), Calendar.getInstance().getTime(), null);
 
-        // Configurar o comportamento do mock voucherRepository quando chamado.
         when(voucherRepository.findById("voucher1")).thenReturn(Optional.of(voucher));
         when(usuarioRepository.existsById(any())).thenReturn(true);
 
-        // Executar o método validarVoucher e verificar o resultado.
         voucherService.validarVoucher("voucher1", "usuario1");
 
-        // Verificar se o método save do voucherRepository foi chamado para salvar o voucher atualizado.
         verify(voucherRepository, times(1)).save(voucher);
     }
 
     @Test
     void testSave() throws UsuarioException, OfertaEspecialException {
-        // Criar um VoucherDTO fictício para o teste.
         VoucherDTO voucherDTO = new VoucherDTO("oferta1", "pedro@email.com", getAmanha());
 
-        // Criar um usuário fictício para o teste.
         Usuario usuario = new Usuario("pedro@email.com", "Usuário 1");
 
-        // Criar uma oferta especial fictícia para o teste.
         OfertaEspecial ofertaEspecial = new OfertaEspecial("oferta1", "Oferta Especial 1", (short) 30);
 
-        // Configurar o comportamento do mock usuarioRepository e ofertaEspecialRepository quando chamados.
         when(usuarioRepository.findById("pedro@email.com")).thenReturn(Optional.of(usuario));
         when(ofertaEspecialRepository.findById("oferta1")).thenReturn(Optional.of(ofertaEspecial));
 
-        // Executar o método save e verificar o resultado.
         voucherService.save(voucherDTO);
 
-        // Verificar se o método save do voucherRepository foi chamado para salvar o novo voucher.
         verify(voucherRepository, times(1)).save(any(Voucher.class));
     }
 
